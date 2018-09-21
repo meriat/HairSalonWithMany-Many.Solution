@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+<h3>List of clients under @Model.StylistName</h3>
+<hr />
+
+<form action="/stylists/@Model.Id/clients" method="post">
+  <label for="client_name">Add a Client</label>
+  <input type="text" name="client_name" id="client_name" />
+  <button type="submit" class="btn btn-info">Add</button>
+</form>
+<hr />
+<h3>List of clients</h3>
+
+<table class = "table table-hover">
+  <thead>
+      <th class="col-md-4">Name</th>
+   
+  </thead>
+  <tbody>
+
+  @foreach (var client in @Model.GetClients())
+  {
+  <tr>
+    <td>@client.Name</td>
+  </tr>
+  }
+  </tbody>
+</table>
+<a href="/stylists" class="btn btn-secondary">Back to the stylist list</a>
