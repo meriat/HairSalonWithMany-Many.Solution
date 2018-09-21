@@ -66,5 +66,37 @@ namespace HairSalon.Tests
         //Assert
         Assert.AreEqual(newStylist, foundStylist);
     }
+
+    [TestMethod]
+    public void Edit_UpdatesItemInDatabase_String()
+    {
+      //Arrange
+      Stylist firstStylist = new Stylist("Skye");
+      firstStylist.Save();
+      string testStylist = "Hyewon";
+
+      //Act
+      firstStylist.Edit(testStylist);
+      string result = Stylist.Find(firstStylist.Id).StylistName;
+
+      //Assert
+      Assert.AreEqual(testStylist,result);
+
+    }
+
+    [TestMethod]
+    public void DeleteCuisine_DeleteCuisineInDB()
+    {
+      //Arrange
+      Stylist firstStylist = new Stylist("Skye");
+      firstStylist.Save();
+
+      //Act
+      Stylist.DeleteStylist(firstStylist.Id);
+      int count = Stylist.GetAll().Count;
+
+      //Assert
+      Assert.AreEqual(0,count);
+    }
     }
 }
