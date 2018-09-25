@@ -26,9 +26,9 @@
   {
   <tr>
     <td class="col-md-4">@client.Name</td>
-    <td class="col-md-4"><a href="/stylists/@Model.Id/clients/@Model.Id/update" class="btn btn-info">Edit</a></td>
+    <td class="col-md-4"><a href="/stylists/@Model.Id/clients/@client.Id/update" class="btn btn-info">Edit</a></td>
     <td class="col-md-4">
-        <form action="/stylists/@Model.Id/clients/@Model.Id/delete" method="post">
+        <form action="/stylists/@Model.Id/clients/@client.Id/delete" method="post">
         <button class="btn btn-danger">Delete</button>
         </form>
     </td>

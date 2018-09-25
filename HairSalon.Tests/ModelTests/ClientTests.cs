@@ -50,7 +50,7 @@ namespace HairSalon.Tests
             Client testClient = new Client("Skye", newStylist.Id);
             testClient.Save();
 
-            Client foundClient = Client.Find(testClient.ClientId);
+            Client foundClient = Client.Find(testClient.Id);
 
             Assert.AreEqual(testClient,foundClient);
         }
@@ -65,7 +65,7 @@ namespace HairSalon.Tests
 
         //Act
         client.Edit("Pierre Herme");
-        Client expectedClient = new Client("Pierre Herme", stylist.Id, client.ClientId);
+        Client expectedClient = new Client("Pierre Herme", stylist.Id, client.Id);
 
         //Assert
         Assert.AreEqual(expectedClient, client);
@@ -80,7 +80,7 @@ namespace HairSalon.Tests
         client.Save();
 
         //Act
-        Client.DeleteClient(client.ClientId);
+        Client.DeleteClient(client.Id);
         int actualCount = Client.GetAll().Count;
 
         //Assert

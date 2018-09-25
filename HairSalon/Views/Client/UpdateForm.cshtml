@@ -1,9 +1,11 @@
 @{
   Layout = "_Layout";
 }
+<div class="container">
 
-<form action="/stylists/@Model.Stylist_Id/clients/@Model.ClientId" method="post">
+<form action="/stylists/@Model.Stylist_Id/clients/@Model.Id" method="post">
   <label for="newName">Edit Name </label>
   <input type="text" name="newName" id="newName" value="@Model.Name" />
   <button type="submit" class="btn btn-success">Update</button>
 </form>
+</div>

@@ -7,15 +7,15 @@ namespace HairSalon.Models
 {
     public class Client
     {
-        public int ClientId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Stylist_Id { get; set; }
 
-        public Client(string name, int stylist_id, int clientId = 0)
+        public Client(string name, int stylist_id, int id = 0)
         {
             Name = name;
             Stylist_Id = stylist_id;
-            ClientId = clientId;
+            Id = id;
         }
 
         public override bool Equals(System.Object otherClient)
@@ -27,7 +27,7 @@ namespace HairSalon.Models
             else
             {
                 Client newClient = (Client)otherClient;
-                bool idEquality = (this.ClientId == newClient.ClientId);
+                bool idEquality = (this.Id == newClient.Id);
                 bool nameEquality = (this.Name == newClient.Name);
                 bool stylist_idEquality = (this.Stylist_Id == newClient.Stylist_Id);
                 return (nameEquality && idEquality && stylist_idEquality);
@@ -82,7 +82,7 @@ namespace HairSalon.Models
             cmd.Parameters.Add(stylist_id);
 
             cmd.ExecuteNonQuery();
-            this.ClientId = (int)cmd.LastInsertedId;
+            this.Id = (int)cmd.LastInsertedId;
 
             conn.Close();
             if (conn != null)
@@ -129,7 +129,7 @@ namespace HairSalon.Models
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
-            searchId.Value = this.ClientId;
+            searchId.Value = this.Id;
             cmd.Parameters.Add(searchId);
 
             MySqlParameter name = new MySqlParameter();
