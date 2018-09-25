@@ -47,6 +47,5 @@ namespace HairSalon.Controllers
             Stylist.DeleteStylist(id);
             return RedirectToAction("Index");
         }
-
     }
 }

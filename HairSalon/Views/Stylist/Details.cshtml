@@ -1,7 +1,7 @@
 @{
   Layout = "_Layout";
 }
-
+<div class="container">
 <h3>List of clients under @Model.StylistName</h3>
 <hr />
 
@@ -16,6 +16,8 @@
 <table class = "table table-hover">
   <thead>
       <th class="col-md-4">Name</th>
+      <th class="col-md-4">Edit</th>
+      <th class="col-md-4">Delete</th>
    
   </thead>
   <tbody>
@@ -23,9 +25,16 @@
   @foreach (var client in @Model.GetClients())
   {
   <tr>
-    <td>@client.Name</td>
+    <td class="col-md-4">@client.Name</td>
+    <td class="col-md-4"><a href="/stylists/@Model.Id/clients/@Model.Id/update" class="btn btn-info">Edit</a></td>
+    <td class="col-md-4">
+        <form action="/stylists/@Model.Id/clients/@Model.Id/delete" method="post">
+        <button class="btn btn-danger">Delete</button>
+        </form>
+    </td>
   </tr>
   }
   </tbody>
 </table>
 <a href="/stylists" class="btn btn-secondary">Back to the stylist list</a>
+</div>

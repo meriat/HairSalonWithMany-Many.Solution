@@ -12,18 +12,7 @@ namespace HairSalon.Tests
         public void Dispose()
         {
             Stylist.DeleteAll();
-
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"ALTER TABLE stylists AUTO_INCREMENT = 1;";
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
+            Client.DeleteAll();
         }
         public ClientTests()
         {
@@ -34,7 +23,7 @@ namespace HairSalon.Tests
         {
             //Arrange
             //Act
-            int result = Client.GetClients().Count;
+            int result = Client.GetAll().Count;
 
             //Assert
             Assert.AreEqual(0, result);
@@ -51,7 +40,51 @@ namespace HairSalon.Tests
             newClient.Save();
 
             //Assert
-            Assert.AreEqual(newClient, Client.GetClients()[0]);
+            Assert.AreEqual(newClient, Client.GetAll()[0]);
+        }
+        [TestMethod]
+        public void Find_FindClient_Client()
+        {
+            Stylist newStylist = new Stylist("Meria");
+            newStylist.Save();
+            Client testClient = new Client("Skye", newStylist.Id);
+            testClient.Save();
+
+            Client foundClient = Client.Find(testClient.ClientId);
+
+            Assert.AreEqual(testClient,foundClient);
+        }
+        [TestMethod]
+        public void Edit_EditClientName()
+        {
+        //Arrange
+        Stylist stylist = new Stylist("Kiran");
+        stylist.Save();
+        Client client = new Client("Laduree", stylist.Id);
+        client.Save();
+
+        //Act
+        client.Edit("Pierre Herme");
+        Client expectedClient = new Client("Pierre Herme", stylist.Id, client.ClientId);
+
+        //Assert
+        Assert.AreEqual(expectedClient, client);
+        }
+        [TestMethod]
+        public void DeleteClient_DeleteAClient()
+        {
+        //Arrange
+        Stylist stylist = new Stylist("French");
+        stylist.Save();
+        Client client = new Client("Laduree", stylist.Id);
+        client.Save();
+
+        //Act
+        Client.DeleteClient(client.ClientId);
+        int actualCount = Client.GetAll().Count;
+
+        //Assert
+        Assert.AreEqual(0, actualCount);
         }
     }
 }
