@@ -25,7 +25,7 @@
   @foreach (var client in Model["stylist"].GetClients())
   {
   <tr>
-    <td class="col-md-4"><a href="">@client.Name</a></td>
+    <td class="col-md-4"><a href="/clients/16">@client.Name @client.Id</a></td>
     <td class="col-md-4"><a href='/stylists/@Model["stylist"].Id/clients/@client.Id/update' class="btn btn-info">Edit</a></td>
     <td class="col-md-4">
         <form action='/stylists/@Model["stylist"].Id/clients/@client.Id/delete' method="post">

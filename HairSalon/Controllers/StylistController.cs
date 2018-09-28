@@ -33,6 +33,8 @@ namespace HairSalon.Controllers
             return View(model);
         }
 
+        
+
         [HttpPost("/stylists/{id}/clients")]
         public ActionResult Add(int id, string client_name)
         {

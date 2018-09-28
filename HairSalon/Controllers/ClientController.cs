@@ -67,21 +67,19 @@ namespace HairSalon.Controllers
             return RedirectToAction("Index");
         }
 
-
-
         // [HttpGet("/stylists/{stylist_id}/clients/{client_id}/update")]
         // public ActionResult UpdateForm(int stylist_id, int client_id)
         // {
         //     Client newClient = Client.Find(client_id);
         //     return View(newClient);
         // }
-        // [HttpPost("/stylists/{stylist_id}/clients/{client_id}")]
-        // public ActionResult Update(int stylist_id, int client_id, string newName)
-        // {
-        //     Client foundClient = Client.Find(client_id);
-        //     foundClient.Edit(newName);
-        //     return RedirectToAction("Details", "Stylist", new { id = stylist_id });
-        // }
+        [HttpPost("/stylists/{stylist_id}/clients/{client_id}")]
+        public ActionResult Update(int stylist_id, int client_id, string newName)
+        {
+            Client foundClient = Client.Find(client_id);
+            foundClient.Edit(newName);
+            return RedirectToAction("Details", "Stylist", new { id = stylist_id });
+        }
 
         // [HttpPost("/stylists/{stylist_id}/clients/{client_id}/delete")]
         // public ActionResult Delete(int stylist_id, int client_id)
