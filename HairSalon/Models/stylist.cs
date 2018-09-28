@@ -142,16 +142,36 @@ namespace HairSalon.Models
             }
         }
 
+        public void AddClient(Client newClient)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO client_stylist (client_id, stylist_id) VALUES (@clientId, @stylistId);";
+
+            cmd.Parameters.AddWithValue("@clientId", newClient.Id);
+            cmd.Parameters.AddWithValue("@stylistId", this.Id);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
         public List<Client> GetClients()
         {
             List<Client> allClients = new List<Client> { };
             MySqlConnection conn = DB.Connection();
             conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylist_id;";
+            cmd.CommandText = @"SELECT clients.* FROM stylists JOIN client_stylist ON (stylists.id = client_stylist.stylist_id) JOIN clients ON (client_stylist.client_id = clients.id ) WHERE stylists.id = @searchId;";
 
             MySqlParameter parameterStylistId = new MySqlParameter();
-            parameterStylistId.ParameterName = "@stylist_id";
+            parameterStylistId.ParameterName = "@searchId";
             parameterStylistId.Value = this.Id;
             cmd.Parameters.Add(parameterStylistId);
 
@@ -161,7 +181,7 @@ namespace HairSalon.Models
                 int id = rdr.GetInt32(0);
                 string name = rdr.GetString(1);
 
-                Client newClient = new Client(name, this.Id, id);
+                Client newClient = new Client(name, this.Id);
                 allClients.Add(newClient);
             }
             conn.Close();
@@ -178,17 +198,17 @@ namespace HairSalon.Models
             conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
 
-            Stylist existingStylist = Stylist.Find(id);
-            
-            List<Client> clientList = existingStylist.GetClients();
+            // Stylist existingStylist = Stylist.Find(id);
 
-            foreach( var client in clientList)
-            {
-                int clientId = client.Id;
-                Client.DeleteClient(clientId);
-            }
+            // List<Client> clientList = existingStylist.GetClients();
 
-            cmd.CommandText = @"DELETE FROM stylists WHERE id = @searchId;";
+            // foreach( var client in clientList)
+            // {
+            //     int clientId = client.Id;
+            //     Client.DeleteClient(clientId);
+            // }
+
+            cmd.CommandText = @"DELETE FROM stylists WHERE id = @searchId;DELETE FROM client_stylist WHERE stylist_id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";

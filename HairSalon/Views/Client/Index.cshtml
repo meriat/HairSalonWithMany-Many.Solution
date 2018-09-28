@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+
+<form action="/clients" method="post">
+<label for="name">Add a new client </label>
+<input type="text" name="name" id="name" /><br >
+<button type="submit" class="btn btn-warning">Add</button>
+</form>
+<hr />
+<h3>List of clients</h3>
+
+<table class = "table table-hover">
+<thead>
+    <th class="col-md-4">Name</th>
+    <th class="col-md-4">Edit</th>
+    <th class="col-md-4">Delete</th>
+</thead>
+  <tbody>
+
+  @foreach (var client in Model)
+  {
+  <tr>
+    <td class="col-md-4"><a href="/clients/@client.Id">@stylist.Name</a></td>
+    <td class="col-md-4"><a href="/clients/@client.Id/update" class="btn btn-info">Edit</a></td>
+    <td class='col-md-4'>
+      <form action="/clients/@client.Id/delete" method="post">
+        <button type="submit" class='btn btn-danger'>Delete</button>
+      </form>
+    </td>
+  </tr>
+  }
+  </tbody>
+</table>
+</div>

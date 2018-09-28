@@ -65,7 +65,7 @@ namespace HairSalon.Tests
 
         //Act
         client.Edit("Pierre Herme");
-        Client expectedClient = new Client("Pierre Herme", stylist.Id, client.Id);
+        Client expectedClient = new Client("Pierre Herme", client.Id);
 
         //Assert
         Assert.AreEqual(expectedClient, client);
