@@ -16,8 +16,8 @@
 <table class = "table table-hover">
   <thead>
       <th class="col-md-4">Name</th>
-      <th class="col-md-4">Edit</th>
-      <th class="col-md-4">Delete</th>
+      <!-- <th class="col-md-4">Edit</th>
+      <th class="col-md-4">Delete</th> -->
    
   </thead>
   <tbody>
@@ -25,10 +25,41 @@
   @foreach (var client in Model["stylist"].GetClients())
   {
   <tr>
-    <td class="col-md-4"><a href="/clients/16">@client.Name @client.Id</a></td>
-    <td class="col-md-4"><a href='/stylists/@Model["stylist"].Id/clients/@client.Id/update' class="btn btn-info">Edit</a></td>
+    <td class="col-md-4">@client.Name</td>
+    <!-- <td class="col-md-4"><a href='/stylists/@Model["stylist"].Id/clients/@client.Id/update' class="btn btn-info">Edit</a></td>
     <td class="col-md-4">
         <form action='/stylists/@Model["stylist"].Id/clients/@client.Id/delete' method="post">
+        <button class="btn btn-danger">Delete</button> -->
+        <!-- </form>
+    </td> -->
+  </tr>
+  }
+  </tbody>
+</table>
+
+<form action='/stylists/@Model["stylist"].Id/specialties' method="post">
+  <label for="specialty_name">Add a Specialty</label>
+  <input type="text" name="specialty_name" id="specialty_name" />
+  <button type="submit" class="btn btn-info">Add</button>
+</form>
+<hr />
+<h3>List of specialties</h3>
+
+<table class = "table table-hover">
+  <thead>
+      <th class="col-md-4">Name</th>
+      <th class="col-md-4">Edit</th>
+      <th class="col-md-4">Delete</th>
+   
+  </thead>
+  <tbody>
+  @foreach (var specialty in Model["stylist"].GetSpecialties())
+  {
+  <tr>
+    <td class="col-md-4"><a href="">@specialty.Name</a></td>
+    <td class="col-md-4"><a href='/stylists/@Model["stylist"].Id/specialties/@specialty.Id/update' class="btn btn-info">Edit</a></td>
+    <td class="col-md-4">
+        <form action='/stylists/@Model["stylist"].Id/specialties/@specialty.Id/delete' method="post">
         <button class="btn btn-danger">Delete</button>
         </form>
     </td>
@@ -36,5 +67,6 @@
   }
   </tbody>
 </table>
+
 <a href="/stylists" class="btn btn-secondary">Back to the stylist list</a>
 </div>

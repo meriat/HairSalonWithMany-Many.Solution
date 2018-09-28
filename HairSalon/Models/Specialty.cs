@@ -165,7 +165,7 @@ namespace HairSalon.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO client_stylist (specialty_id, stylist_id) VALUES (@specialtyid, @stylistId);";
+            cmd.CommandText = @"INSERT INTO specialty_stylist (specialty_id, stylist_id) VALUES (@specialtyid, @stylistId);";
 
             cmd.Parameters.AddWithValue("@specialtyId", this.Id);
             cmd.Parameters.AddWithValue("@stylistId", newStylist.Id);
@@ -214,7 +214,7 @@ namespace HairSalon.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM specialties;";
+            cmd.CommandText = @"TRUNCATE TABLE specialties;";
 
             cmd.ExecuteNonQuery();
 

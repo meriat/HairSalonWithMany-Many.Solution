@@ -33,8 +33,6 @@ namespace HairSalon.Controllers
             return View(model);
         }
 
-        
-
         [HttpPost("/stylists/{id}/clients")]
         public ActionResult Add(int id, string client_name)
         {
@@ -46,6 +44,21 @@ namespace HairSalon.Controllers
 
             Stylist foundStylist = Stylist.Find(id);
             foundStylist.AddClient(addClient);
+
+            return RedirectToAction("Details", new {id = foundStylist.Id});
+        }
+
+        [HttpPost("/stylists/{id}/specialties")]
+        public ActionResult AddSpecialty(int id, string specialty_name)
+        {
+            Specialty addSpecialty;
+
+            // int addSpecialtyInt = int.Parse(SpecialtyId);
+            addSpecialty = new Specialty(specialty_name);
+            addSpecialty.Save();
+
+            Stylist foundStylist = Stylist.Find(id);
+            foundStylist.AddSpecialty(addSpecialty);
 
             return RedirectToAction("Details", new {id = foundStylist.Id});
         }

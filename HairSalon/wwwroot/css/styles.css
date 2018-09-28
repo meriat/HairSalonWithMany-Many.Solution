@@ -1,0 +1,24 @@
+div#header {
+    position: relative;;
+    top:0px;
+    left:0px;
+    width:100%;
+    color:#CCC;
+    background:rgb(243, 195, 195);
+    padding:8px;
+    text-align: center;
+  }
+
+  body {
+    font-family: 'Special Elite', cursive;
+    
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .jumbotron{
+    background-image: url(../img/1.jpg);
+    
+  }
