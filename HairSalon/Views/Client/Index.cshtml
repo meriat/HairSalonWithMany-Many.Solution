@@ -23,7 +23,7 @@
   @foreach (var client in Model)
   {
   <tr>
-    <td class="col-md-4"><a href="/clients/@client.Id">@stylist.Name</a></td>
+    <td class="col-md-4"><a href="/clients/@client.Id">@client.Name</a></td>
     <td class="col-md-4"><a href="/clients/@client.Id/update" class="btn btn-info">Edit</a></td>
     <td class='col-md-4'>
       <form action="/clients/@client.Id/delete" method="post">

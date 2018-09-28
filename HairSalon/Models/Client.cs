@@ -98,9 +98,9 @@ namespace HairSalon.Models
             if (rdr.Read())
             {
                 string name = rdr.GetString(1);
-                int cuisine_id = rdr.GetInt32(2);
+                int clientid = rdr.GetInt32(0);
 
-                foundClient = new Client(name, cuisine_id);
+                foundClient = new Client(name, id);
             }
             conn.Close();
             if (conn != null)
@@ -184,7 +184,7 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT stylists.* FROM clients JOIN client_stylist ON (clients.id = client_stylist.client_id) JOIN clients ON (client_stylist.stylist_id = stylists.id ) WHERE clients.id = @searchId;";
+            cmd.CommandText = @"SELECT stylists.* FROM clients JOIN client_stylist ON (clients.id = client_stylist.client_id) JOIN stylists ON (client_stylist.stylist_id = stylists.id ) WHERE clients.id = @searchId;";
 
             MySqlParameter parameterStylistId = new MySqlParameter();
             parameterStylistId.ParameterName = "@searchId";

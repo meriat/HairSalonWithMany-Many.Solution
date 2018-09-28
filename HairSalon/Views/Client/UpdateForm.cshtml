@@ -3,9 +3,10 @@
 }
 <div class="container">
 
-<form action="/stylists/@Model.Stylist_Id/clients/@Model.Id" method="post">
-  <label for="newName">Edit Name </label>
-  <input type="text" name="newName" id="newName" value="@Model.Name" />
-  <button type="submit" class="btn btn-success">Update</button>
+<form action="/clients/@Model.Id/update" method="post">
+<label for="newName">New name: </label>
+<input type="text" id="newName" name="newName" value=@Model.Name>
+<button type="submit" class="btn btn-success">Update</button>
 </form>
 </div>
+
