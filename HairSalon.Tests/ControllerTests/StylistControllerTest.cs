@@ -7,7 +7,7 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
     [TestClass]
-    public class HomeControllerTest
+    public class StylistControllerTest
     {
         [TestMethod]
         public void Index_ReturnsCorrectView_True()
@@ -20,6 +20,21 @@ namespace HairSalon.Tests
 
             //Assert
             Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+        }
+ 
+        [TestMethod]
+        public void Index_TestIndexViewData_ViewResult()
+        {
+            //Arrange
+            StylistController controller = new StylistController();
+            List <Stylist> allStylists = Stylist.GetAll();
+
+            //Act
+            ViewResult result = controller.Index() as ViewResult;
+            List <Stylist> actualAllStylists = result.ViewData.Model as List <Stylist>;
+
+            //Assert
+            CollectionAssert.AreEqual(allStylists, actualAllStylists);
         }
     }
 }

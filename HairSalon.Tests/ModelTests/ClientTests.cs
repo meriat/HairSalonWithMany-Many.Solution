@@ -57,34 +57,34 @@ namespace HairSalon.Tests
         [TestMethod]
         public void Edit_EditClientName()
         {
-        //Arrange
-        Stylist stylist = new Stylist("Kiran");
-        stylist.Save();
-        Client client = new Client("Laduree", stylist.Id);
-        client.Save();
+            //Arrange
+            Stylist stylist = new Stylist("Kiran");
+            stylist.Save();
+            Client client = new Client("Laduree", stylist.Id);
+            client.Save();
 
-        //Act
-        client.Edit("Pierre Herme");
-        Client expectedClient = new Client("Pierre Herme", client.Id);
+            //Act
+            client.Edit("Pierre Herme");
+            Client expectedClient = new Client("Pierre Herme", client.Id);
 
-        //Assert
-        Assert.AreEqual(expectedClient, client);
+            //Assert
+            Assert.AreEqual(expectedClient, client);
         }
         [TestMethod]
         public void DeleteClient_DeleteAClient()
         {
-        //Arrange
-        Stylist stylist = new Stylist("French");
-        stylist.Save();
-        Client client = new Client("Laduree", stylist.Id);
-        client.Save();
+            //Arrange
+            Stylist stylist = new Stylist("French");
+            stylist.Save();
+            Client client = new Client("Laduree", stylist.Id);
+            client.Save();
 
-        //Act
-        Client.DeleteClient(client.Id);
-        int actualCount = Client.GetAll().Count;
+            //Act
+            Client.DeleteClient(client.Id);
+            int actualCount = Client.GetAll().Count;
 
-        //Assert
-        Assert.AreEqual(0, actualCount);
+            //Assert
+            Assert.AreEqual(0, actualCount);
         }
     }
 }
